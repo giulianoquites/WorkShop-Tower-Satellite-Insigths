@@ -1,6 +1,6 @@
 ### Instalando o Red Hat Insigths Client
 
-Para instalar o Red Hat insigths precisamos registar o RHEL no Salellite ou Cloud.redhat.com atraves do insights-client.
+Precisamos instalar o Red Hat insigths somente nas versões 7 later. Nas versões do RHEL 8, temos o insigts por default. Para registar o RHEL no Salellite ou Cloud.redhat.com:
 
 Podemos fazer o registro do hosts no satellite atraves do Activation Key ou Bootstrap.py:
 
@@ -22,7 +22,19 @@ Depois execute o comando para fazer o registro:
 Executando via Activation Key:
 
 ~~~~
-[root@client ~]# rpm -Uvh http://sat66.gquites.local/pub/katello-ca-consumer-latest.noarch.rpm ;subscription-manager register --org="gquites" --activationkey="tower"
+[root@client ~]# rpm -Uvh http://sat66.gquites.local/pub/katello-ca-consumer-latest.noarch.rpm 
+Retrieving http://sat66.gquites.local/pub/katello-ca-consumer-latest.noarch.rpm
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:katello-ca-consumer-sat66.gquites################################# [100%]
+[root@client ~]#   
+[root@client ~]# subscription-manager register --org="gquites" --activationkey="tower"
+The system has been registered with ID: c3d2c23c-ea2b-4b48-883d-1dd317a9bc70
+The registered system name is: client.gquites.local
+Installed Product Current Status:
+Product Name: Red Hat Enterprise Linux Server
+Status:       Subscribed
+[root@client ~]#
 ~~~~
 
 Depois de registrar o hosts, precisamos validar se o repositorio foi ativado:
@@ -53,4 +65,11 @@ Successfully uploaded report from client.gquites.local to account 540155.
 View the Red Hat Insights console at https://cloud.redhat.com/insights/
 
 ~~~~
+
+Abra o Nabegador e acesse a URL do Satellite. Log com USER: admin PASS: redhat..123 e depois:
+
+Acesse Hosts → All Hosts. Nessa lista, podemos ver o hosts que acabamos de registrar. 
+
+![](images/001.png)
+
 
