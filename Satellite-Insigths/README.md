@@ -124,14 +124,26 @@ Precisamos dar um nome para o Action Planner, informar em qual host vamos aplica
 
 ![](images/005.png)
 
+Depois de criarmos o Action Planner. Podemos fazer algumas verifições no plano de execução. Podemos deixar o sistema reiniciar? O Hosts esta corrento em "Systems"? Tudo isso grarantido. Podemos executar o Run Playbook.
+
 ![](images/007.png)
+
+O Satellite vai conectar via ssh e rodar o playbook de configurações. Deixando o status como "pending"
 
 ![](images/011.png)
 
+Depois de executar com sucesso. Podemos ver o clicando no nome do hosts. 
+
 ![](images/012.png)
+
+A saída do playbook ficará disponivel no satellite. 
+
+![](images/014.png)
+
+No terminal, deixei logado verificando os logs e se o hosts iria realmente reiciar:
 
 ![](images/013.png)
 
-![](images/014.png)
+
 
 
