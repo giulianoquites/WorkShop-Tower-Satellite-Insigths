@@ -1,4 +1,4 @@
-### Instalando o Red Hat Insigths Client
+### Registrando os hosts no satellite:
 
 Precisamos instalar o Red Hat insigths somente nas versões 7 later. Nas versões do RHEL 8, temos o insigts por default. Para registar o RHEL no Salellite ou Cloud.redhat.com:
 
@@ -28,7 +28,7 @@ Preparing...                          ################################# [100%]
 Updating / installing...
    1:katello-ca-consumer-sat66.gquites################################# [100%]
 [root@client ~]#   
-[root@client ~]# subscription-manager register --org="gquites" --activationkey="tower"
+[root@client ~]# subscription-manager register --org="gquites" --activationkey="rhel7server"
 The system has been registered with ID: c3d2c23c-ea2b-4b48-883d-1dd317a9bc70
 The registered system name is: client.gquites.local
 Installed Product Current Status:
@@ -36,6 +36,8 @@ Product Name: Red Hat Enterprise Linux Server
 Status:       Subscribed
 [root@client ~]#
 ~~~~
+
+### Instalar o Insights Client e registrar:
 
 Depois de registrar o hosts, precisamos validar se o repositorio foi ativado:
 
@@ -66,10 +68,61 @@ View the Red Hat Insights console at https://cloud.redhat.com/insights/
 
 ~~~~
 
+### Conigurar a chave puglic do Satellite nos hosts remotos:
+
+Os hosts remotos precisam ser configurados com a chave public do proxy smart. O ROOT é usado como usuário padrão para acessar hosts remotos via SSH. Você pode definir a configuração global remote_execution_ssh_user para alterar o padrão. Outra maneira é usar as configuraçoes globais para definir uma senha. 
+
+As chaves ssh para os  smart proxies estão disponíveis como um parâmetro do host (remote_execution_ssh_keys). Isso permite que você gerencie as chaves autorizadas com sua plataforma de gerenciamento de configuração preferida ou através de um modelo de provisionamento.
+
+Segue uma forma facil de copiar a chave para os clientes:
+
+~~~~
+[root@sat ~]# ssh-copy-id -i /var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub root@cliente.gquites.local
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/var/lib/foreman-proxy/ssh/id_rsa_foreman_proxy.pub"
+The authenticity of host 'cliente.gquites.local (192.168.123.164)' can't be established.
+ECDSA key fingerprint is SHA256:/t7BphgCX2Y/pUwEBG3s2RpYZgovl4jqJv6DhGSXaRQ.
+ECDSA key fingerprint is MD5:e0:a9:9b:96:01:06:c0:68:35:7d:40:87:3c:e1:5f:41.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@cliente.gquites.local's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@cliente.gquites.local'"
+and check to make sure that only the key(s) you wanted were added.
+
+[root@sat ~]# 
+
+~~~~
+
+### Conigurar a chave puglic do Satellite nos hosts remotos:
+
+
 Abra o Nabegador e acesse a URL do Satellite. Log com USER: admin PASS: redhat..123 e depois:
 
 Acesse Hosts → All Hosts. Nessa lista, podemos ver o hosts que acabamos de registrar. 
 
 ![](images/001.png)
+
+
+Acesse Hosts → Content hosts podemos ver o status da subscrição e quantidade de pacotes para fazer update.
+
+
+![](images/002.png)
+
+
+Depois de vermos o status do hosts. Podemos ir em Insights → Overview para ver todas as Actions Summary que podemos aplicar.
+
+![](images/003.png)
+
+Vamos criar uma Action Planner para o hosts client como modelo.
+
+![](images/004.png)
+
+Precisamos dar um nome para o Action Planner, informar em qual host vamos aplicar e quais os actions. Depois clicar em SAVE.  
+
+![](images/005.png)
+
 
 
