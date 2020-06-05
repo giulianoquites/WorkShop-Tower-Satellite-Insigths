@@ -124,5 +124,14 @@ Precisamos dar um nome para o Action Planner, informar em qual host vamos aplica
 
 ![](images/005.png)
 
+![](images/007.png)
+
+![](images/011.png)
+
+![](images/012.png)
+
+![](images/013.png)
+
+![](images/014.png)
 
 
