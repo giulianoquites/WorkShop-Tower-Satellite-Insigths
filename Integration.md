@@ -6,8 +6,8 @@ Podemos fazer o registro do hosts no satellite atraves do Activation Key ou Boot
 
 ~~~~
 
-[root@client ~]# curl https://sat66.gquites.local/pub/bootstrap.py > bootstrap.py --insecure
-[root@client ~]# chmod +x bootstrap.py
+[root@cliente ~]# curl https://sat66.gquites.local/pub/bootstrap.py > bootstrap.py --insecure
+[root@cliente ~]# chmod +x bootstrap.py
 
 ~~~~
 
@@ -15,26 +15,26 @@ Depois execute o comando para fazer o registro:
 
 ~~~~
 
-[root@client ~]# ./bootstrap.py -l admin -s sat66.gquites.local -o 'gquites.local' -L 'gquites' -a rhel7
+[root@cliente ~]# ./bootstrap.py -l admin -s sat66.gquites.local -o 'gquites.local' -L 'gquites' -a rhel7
 
 ~~~~
 
 Executando via Activation Key:
 
 ~~~~
-[root@client ~]# rpm -Uvh http://sat66.gquites.local/pub/katello-ca-consumer-latest.noarch.rpm 
+[root@cliente ~]# rpm -Uvh http://sat66.gquites.local/pub/katello-ca-consumer-latest.noarch.rpm 
 Retrieving http://sat66.gquites.local/pub/katello-ca-consumer-latest.noarch.rpm
 Preparing...                          ################################# [100%]
 Updating / installing...
    1:katello-ca-consumer-sat66.gquites################################# [100%]
-[root@client ~]#   
-[root@client ~]# subscription-manager register --org="gquites" --activationkey="rhel7server"
+[root@cliente ~]#   
+[root@cliente ~]# subscription-manager register --org="gquites" --activationkey="rhel7server"
 The system has been registered with ID: c3d2c23c-ea2b-4b48-883d-1dd317a9bc70
 The registered system name is: client.gquites.local
 Installed Product Current Status:
 Product Name: Red Hat Enterprise Linux Server
 Status:       Subscribed
-[root@client ~]#
+[root@cliente ~]#
 ~~~~
 
 ### Instalar o Insights Client e registrar:
@@ -44,7 +44,7 @@ Depois de registrar o hosts, precisamos validar se o repositorio foi ativado:
 Para fazer pelo Satellite precisa do repositorio:
 
 ~~~~
-[root@client ~]# yum repolist
+[root@cliente ~]# yum repolist
 Loaded plugins: enabled_repos_upload, package_upload, product-id, search-disabled-repos, subscription-manager
 repo id                                                repo name                                                                      status
 !rhel-7-server-insights-3-rpms/x86_64                  Red Hat Insights 3 (for RHEL 7 Server) (RPMs)                                        8
@@ -56,9 +56,9 @@ repo id                                                repo name                
 Com o repositorio ativado. Vamos instalar o cliente o insigths e registrar.
 
 ~~~~
-[root@client ~]# yum -y install insights-client  
+[root@cliente ~]# yum -y install insights-client  
 
-[root@client ~]# insights-client --register 
+[root@cliente ~]# insights-client --register 
 This host has already been registered.
 Automatic scheduling for Insights has been enabled.
 Starting to collect Insights data for client.gquites.local
