@@ -96,7 +96,7 @@ and check to make sure that only the key(s) you wanted were added.
 
 ~~~~
 
-### Conigurar a chave puglic do Satellite nos hosts remotos:
+### Conigurar a chave public do Satellite nos hosts remotos:
 
 
 Abra o Nabegador e acesse a URL do Satellite. Log com USER: admin PASS: redhat..123 e depois:
